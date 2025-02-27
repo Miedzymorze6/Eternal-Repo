@@ -1,5 +1,3 @@
-[![Downloads](https://static.pepy.tech/badge/sea-level-simulation)](https://pepy.tech/project/sea-level-simulation)
-
 # Sea Level Rise Simulation
 
 This project simulates sea level rise over time using elevation data retrieved from the SRTM database. It generates an animated GIF showing different climate scenarios and their effects on land submersion.

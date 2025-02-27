@@ -1,53 +1,64 @@
-This piece of software does not imply or promote any malicious intentions whatsoever that could be falsely justified/claimed by any individual/organization/company/government and such in any field of crime.
+# Population Evolution Simulation
 
-This code simulates an evolutionary population model where agents (humans) are created, reproduce, and are subjected to natural selection based on certain traits like fitness, height, and genetic background. Here's a breakdown of its key components:
+This project simulates the evolution of a population based on various genetic, environmental, and competitive factors. The simulation includes agents with traits such as eye color, hair color, height, fitness, and nationality. It models reproduction, survival, selection pressure, and competitive interactions among agents.
 
-1. Traits and Global Constants
-The simulation defines traits such as eye color, hair color, skin color, height, and nationality.
-Nationalities have different strength factors, affecting an agent's fitness.
-Agents can be male or female, with different attributes and reproductive roles.
+## Features
+- **Agent Traits:** Each agent has gender, eye color, hair color, height, fitness, skin color, and nationality.
+- **Genetic Background:** Agents inherit traits and genetic background from their parents.
+- **Reproduction:** Agents mate, producing offspring with inherited and sometimes mutated traits.
+- **Natural Selection:** Agents can die due to hazardous traits or competitive disadvantages.
+- **Competitive Interactions:** Male agents may fight, and females choose mates based on preferences.
+- **Simulation Statistics:** The program tracks population size, average fitness, height, and distribution of traits.
 
-3. The Agent Class
-Defines individuals in the simulation with attributes like:
-ID, gender, eye color, hair color, height, fitness, nationality, age, cooldown (for females), and genetic background.
-Females have beauty ratings and mate preferences (e.g., favoring height or eye color).
-Males have a limited number of mating opportunities per generation (monogamy for low-rank males, polygamy ~ trio for top ranking males). 
+## Installation
+This project requires Python and `matplotlib` for visualization. Install dependencies with:
+```sh
+pip install matplotlib
+```
 
-5. Fitness & Selection Functions
-effective_fitness(agent): Computes fitness based on nationality strength.
-is_pure(agent): Checks if an agent is 100% of one nationality.
-get_pure_nationality(agent): Returns the nationality if pure.
+## Usage
+Run the simulation with:
+```sh
+python simulation.py
+```
+Modify the parameters inside `run_simulation()` to change the number of generations and initial population size.
 
-7. Creating & Reproducing Agents
-create_random_agent(): Generates agents with random traits.
-reproduce(female, male): Simulates offspring creation with:
-Trait inheritance with mutation probability (5%).
-Height influenced by parents' height + fitness.
-Fitness slightly mutated.
-Nationality inherited or mixed.
-Genetic background averaged from parents.
-1-2 children per mating event.
+## Code Overview
+### `Agent` Class
+Represents an individual in the population with inherited and randomly assigned traits.
 
-9. Natural Selection
-forced_trait_death(agent): Some traits have survival disadvantages:
-Brown eyes: 20% chance of dying.
-Dark skin: 33% chance of dying.
-Height below 160 cm: 25% chance of dying.
-Low fitness: 15% chance of dying.
-male_fights(population): Simulates male-male combat, where weaker males may die (15% chance per fight).
-Bottom 10% of the population (lowest effective fitness) are removed each generation.
+### `create_random_agent()`
+Generates an agent with random attributes.
 
-11. Mate Selection
-get_preferred_male(female, available_males): Determines the best male for a female based on her preferences.
-get_top_two_males(female, available_males): High-beauty females trigger male contests, where the winner mates.
-Pure females (90% probability) prefer pure males of the same nationality.
+### `reproduce(female, male)`
+Handles reproduction, producing offspring based on parental traits.
 
-13. Running the Simulation
-run_simulation(generations, initial_population_size):
-Ages agents.
-Reduces female cooldown.
-Removes agents that die from trait-based hazards.
-Simulates fights between males.
-Mates eligible males & females to produce offspring.
-Tracks statistics (population size, fitness, height, colors, nationalities).
-Prints details about the population.
+### `forced_trait_death(agent)`
+Determines if an agent dies due to hazardous traits.
+
+### `male_fights(population)`
+Simulates fights between male agents, where weaker males may be eliminated.
+
+### `run_simulation(generations, initial_population_size)`
+Runs the simulation for the specified number of generations, applying selection, reproduction, and competitive interactions.
+
+## Example Output
+```
+=== Generation 1 ===
+> Female 3 chose Male 7.
+> Male fight: Agent 5 vs Agent 8 – Agent 8 loses!
+Population at end of Generation 1: 45
+New Offspring: 12
+Average Fitness: 75.2
+```
+
+## Visualization
+The program collects statistical data that can be plotted using `matplotlib` to analyze trends in population fitness, height, and genetic diversity over generations.
+
+## Future Improvements
+- Implement more environmental factors affecting survival.
+- Add different selection pressures for traits.
+- Improve visualization for better insights into population trends.
+
+## License
+This project is licensed under the MIT License.

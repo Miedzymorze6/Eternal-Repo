@@ -18,7 +18,3 @@ This is a simulation of a delivery system with multiple trucks managing customer
   - `math`
   - `matplotlib`
   
-You can install the required libraries using `pip`:
-
-```bash
-pip install matplotlib
